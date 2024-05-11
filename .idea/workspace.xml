@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b43016ba-8725-4331-82c9-fadd74a56581" name="Changes" comment="" />
+    <list default="true" id="b43016ba-8725-4331-82c9-fadd74a56581" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,8 +33,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.Most_Common_Word.executor": "Run",
+    "Python.Reorder_Data_in_Log_Files.executor": "Run",
+    "Python.Reverse_String.executor": "Debug",
     "Python.Valid_Palindrome.executor": "Run",
-    "Python.temp.executor": "Run",
+    "Python.temp.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
