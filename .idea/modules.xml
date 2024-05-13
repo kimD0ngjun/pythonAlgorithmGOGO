@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/study.iml" filepath="$PROJECT_DIR$/.idea/study.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/pythonAlgorithmGOGO.iml" filepath="$PROJECT_DIR$/.idea/pythonAlgorithmGOGO.iml" />
+>>>>>>> 3db1b525be0edcb70e64ec59456b327646b0742d
     </modules>
   </component>
 </project>
