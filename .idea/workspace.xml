@@ -4,6 +4,11 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+=======
+<<<<<<< HEAD
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="8465506d-3e00-459b-a214-84cd60f96514" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/pythonAlgorithmGOGO/2024-05-14/강주성/1. 유효한 팰린드롬.py" afterDir="false" />
@@ -16,6 +21,7 @@
       <change beforePath="$PROJECT_DIR$/pythonAlgorithmGOGO" beforeDir="false" afterPath="$PROJECT_DIR$/pythonAlgorithmGOGO" afterDir="false" />
     </list>
 =======
+>>>>>>> 0c0af23c9eb52d87e259c4cbe434cf706f5bc19e
   <component name="ChangeListManager">
     <list default="true" id="b43016ba-8725-4331-82c9-fadd74a56581" name="Changes" comment="" />
 >>>>>>> 3db1b525be0edcb70e64ec59456b327646b0742d
@@ -25,6 +31,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 0c0af23c9eb52d87e259c4cbe434cf706f5bc19e
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -32,6 +41,8 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
+=======
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/pythonAlgorithmGOGO" />
   </component>
@@ -43,12 +54,13 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
 =======
+>>>>>>> 0c0af23c9eb52d87e259c4cbe434cf706f5bc19e
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2gBbHy0qs7qiDuSqeDfRCMxemzM" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
 >>>>>>> 3db1b525be0edcb70e64ec59456b327646b0742d
@@ -56,17 +68,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Most_Common_Word.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Reorder_Data_in_Log_Files.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Reverse_String.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.Valid_Palindrome.executor&quot;: &quot;Run&quot;,
+    &quot;Python.temp.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/kimdongjun/Desktop/BackEnd/pythonAlgorithmGOGO&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
+<<<<<<< HEAD
+}</component>
+  <component name="RunManager">
+    <configuration name="temp" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="pythonAlgorithmGOGO" />
+=======
 }]]></component>
 <<<<<<< HEAD
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="study" />
+>>>>>>> 0c0af23c9eb52d87e259c4cbe434cf706f5bc19e
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -74,11 +100,20 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
+<<<<<<< HEAD
+      <option name="SDK_NAME" value="Python 3.8" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2024-05-14/김동준" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2024-05-14/김동준/temp.py" />
+=======
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+>>>>>>> 0c0af23c9eb52d87e259c4cbe434cf706f5bc19e
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -88,6 +123,12 @@
       <method v="2" />
     </configuration>
   </component>
+<<<<<<< HEAD
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-5a2391486177-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13763.11" />
+=======
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -98,6 +139,7 @@
       <set>
         <option value="bundled-python-sdk-50da183f06c8-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13135.95" />
 >>>>>>> 3db1b525be0edcb70e64ec59456b327646b0742d
+>>>>>>> 0c0af23c9eb52d87e259c4cbe434cf706f5bc19e
       </set>
     </attachedChunks>
   </component>

@@ -2,10 +2,17 @@
 <project version="4">
 <<<<<<< HEAD
   <component name="Black">
+    <option name="sdkName" value="Python 3.12 (pythonAlgorithmGOGO)" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (pythonAlgorithmGOGO)" project-jdk-type="Python SDK" />
+=======
+<<<<<<< HEAD
+  <component name="Black">
     <option name="sdkName" value="Python 3.12 (study)" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (study)" project-jdk-type="Python SDK" />
 =======
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.8 (pythonAlgorithmGOGO)" project-jdk-type="Python SDK" />
 >>>>>>> 3db1b525be0edcb70e64ec59456b327646b0742d
+>>>>>>> 0c0af23c9eb52d87e259c4cbe434cf706f5bc19e
 </project>
