@@ -4,7 +4,7 @@ import copy
 
 class Solution:
     # 풀이 최적화를 위한 함수 생성
-    def pathfinder(self, maze):
+    def pathfinder(self):
         # 코드에서의 좌표 개념 : (상하, 좌우)
         # 이중 리스트에서의 상하좌우이므로 상하는 겉 리스트의 인덱스, 좌우는 내부 리스트의 인덱스
         # 백트랙킹에 벽 뚫기가 추가돼서 벽 탐지 로직에 건너편 역시 탐색해야 함
@@ -13,27 +13,17 @@ class Solution:
         dy = [0, 0, -1, 1]  # 좌우
 
         # 벽 + 왔던 길 : 0, 길 : 1
-        # 튜플 : (x, y, distance, 경로)
+        # 튜플 : (x, y, broken(벽 부쉈는지 여부))
         # 경로 공유가 안 되도록 지도도 슬라이싱으로 복사해서 새로운 지도 할당시키기
         queue = deque()
-        queue.append((0, 0, 1, maze))
+        queue.append((0, 0, 0))
 
         while queue:
-            x, y, distance, prev_maze = queue.popleft()
-
-            # 새로운 경로 할당
-            new_maze = copy.deepcopy(prev_maze)
-
-            # 팝 지점 방문 처리
-            new_maze[x][y] = 1
-            # 팝 지점의 사방 좌표 확인용
-            four_points = []
-            # 추가 탐색 필요 여부 변수
-            need_search = True
+            x, y, broken = queue.popleft()
 
             # 팝했을 때 종점(N, M)에 도착했다면
             if x == len(maze) - 1 and y == len(maze[0]) - 1:
-                return distance
+                return visited[x][y][broken]
 
             # 네 방향
             for i in range(4):
@@ -41,62 +31,28 @@ class Solution:
                 next_x = x + dx[i]
                 next_y = y + dy[i]
 
-                four_points.append((next_x, next_y))
-
                 # 백트랙킹 조건
                 # 맵 이탈
                 if not (0 <= next_x < len(maze) and 0 <= next_y < len(maze[0])):
                     continue
 
-                # 전제조건: 사방이 벽(1)이어야 함
-                if new_maze[next_x][next_y] == 1:
-                    continue
+                """
+                1. 다음 이동지점이 벽 and 벽인데 아직 벽 안 부숨
+                2. 다음 이동지점이 벽 x and 아직 방문 안됨
+                
+                그냥 문제 조건이 벽 한 번만 부술 수 있다... 였음; 개빡
+                """
 
-                # 방문 처리
-                if new_maze[next_x][next_y] == 0:
-                    # 방문했으면 다시 벽 처리
-                    new_maze[next_x][next_y] = 1
-                    # 큐에 append 되면서 길이 변화
-                    queue.append((next_x, next_y, distance + 1, new_maze))
-                    # 추가 탐색 불필요
-                    need_search = False
+                # 1번
+                if maze[next_x][next_y] == 1 and broken == 0:
+                    visited[next_x][next_y][1] = visited[x][y][0] + 1
+                    queue.append((next_x, next_y, 1))
 
-            # 처음 탐색한 네 방향 전부 벽일때(즉 네 방향 전부 탐색이 완료됐고)
-            # 건너편 추가 탐색점이 1인지를 보는 로직이 추가로 필요
-            if need_search:
-
-                for point in four_points:
-                    point_x, point_y = point
-
-                    # 백트랙킹 조건
-                    # 맵 이탈
-                    if not (0 <= point_x < len(maze) and 0 <= point_y < len(maze[0])):
-                        continue
-
-                    for i in range(4):
-
-                        point_next_x = point_x + dx[i]
-                        point_next_y = point_y + dy[i]
-
-                        # 백트랙킹 조건
-                        if point_next_x == x and point_next_y == y:
-                            continue
-
-                        # 맵 이탈
-                        if not (0 <= point_next_x < len(maze) and 0 <= point_next_y < len(maze[0])):
-                            continue
-
-                        # 추가 탐색지점조차 벽이라면 더이상 탐색 x
-                        if new_maze[point_next_x][point_next_y] == 1:
-                            continue
-
-                        # 추가 탐색지점이 길(0)이라면
-                        if new_maze[point_next_x][point_next_y] == 0:
-                            # 방문했으면 다시 벽 처리
-                            new_maze[point_next_x][point_next_y] = 1
-
-                            # 길이는 2배
-                            queue.append((point_next_x, point_next_y, distance + 2, new_maze))
+                # 2번
+                # 현재까지의 경로에서 벽을 부순 상태 혹은 안 부순 상태 그대로 유지하면서 이동
+                if maze[next_x][next_y] == 0 and visited[next_x][next_y][broken] == 0:
+                    visited[next_x][next_y][broken] = visited[x][y][broken] + 1
+                    queue.append((next_x, next_y, broken))
 
         # 큐가 비워질 때까지 종점의 좌표를 팝하지 못하면 그건 길이 막혔다는 뜻
         return -1
@@ -110,13 +66,15 @@ maze = []
 for _ in range(N):
     maze.append(list(map(int, input())))
 
-# print("N:" + str(N))
-# print("M:" + str(M))
-# print(maze)
+# 3차원 리스트
+# 가장 내부의 리스트는 벽 부순 경로 계산과 벽 안 부순 경로 계산 따로따로
+# 튜플을 쓰지 않은건 업데이트가 필요하기 때문
+visited = [[[0, 0] for _ in range(M)] for _ in range(N)]
+visited[0][0][0] = 1
 
 # 정답 출력
 s = Solution()
-print(s.pathfinder(maze))
+print(s.pathfinder())
 
 
 
