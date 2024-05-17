@@ -1,13 +1,12 @@
-import heapq
 from typing import List
 
 
 # 출력 함수 작성
-def solution(points: List, new_point: int):
+def solution(points: List, new_point: int, point_range: int):
     """
     우선, 정렬된 배열의 마지막 인덱스 요소와 값이 같으면 -1을 반환한다.
     """
-    if points[len(points)-1] == new_point:
+    if points[len(points)-1] == new_point and point_range == len(points):
         print(-1)
         return
 
@@ -16,12 +15,10 @@ def solution(points: List, new_point: int):
     points.sort(reverse=True)
     # print(points)
 
-    # 최적화(-1 리턴)
-    # 여기서 틀렸네
     """
     또한, 정렬된 배열의 마지막 인덱스 요소의 값이 되면 -1을 반환한다.
     """
-    if points[len(points)-1] == new_point:
+    if points[len(points)-1] == new_point and point_range + 1 == len(points):
         print(-1)
         return
 
@@ -33,7 +30,7 @@ def solution(points: List, new_point: int):
     left = 0
     right = 1
 
-    while right <= len(index_arr)-1:
+    while right < len(index_arr):
         sequence = index_arr[left][1]
 
         # 만약 내림차순 순서대로 가다가 같은 요소들을 만나면
@@ -43,6 +40,9 @@ def solution(points: List, new_point: int):
                 # 내부 리스트의 인덱스 1인 등수 바꾸기
                 index_arr[right][1] = sequence
                 right += 1
+
+                if right >= len(index_arr):
+                    break
             else:
                 break
 
@@ -50,7 +50,15 @@ def solution(points: List, new_point: int):
         right += 1
 
     # print(index_arr)
-    print(points.index(new_point) + 1)
+    # 여기겠다
+    new_index = 0
+
+    while new_index < len(index_arr):
+        if index_arr[new_index][0] == new_point:
+            print(index_arr[new_index][1])
+            break
+
+        new_index += 1
 
 
 
@@ -62,6 +70,18 @@ P == point_range
 """
 count, new_point, point_range = map(int, input().split())
 
-points = list(map(int, input().split()))
-# 정답 출력
-solution(points, new_point)
+
+if count == 0:
+    print(1)
+else:
+    points = list(map(int, input().split()))
+    # 정답 출력
+    solution(points, new_point, point_range)
+
+"""
+반례 : right의 인덱스에러 문제
+
+ex)
+4 1 10
+0 0 0 0
+"""
