@@ -1,70 +1,50 @@
-from collections import defaultdict
-from typing import List
+import sys
 
+N, M, inventory_blocks = map(int, input().split())
+grid = [list(map(int, input().split())) for _ in range(N)]
 
-# 높이의 범위 : 가장 낮은 블록 ~ 가장 높은 블록
+# 최소 시간과 최대 높이 초기화
 """
-1) 좌표 (i, j)의 가장 위에 있는 블록을 제거하여 인벤토리에 넣는다. -> 2초
-2) 인벤토리에서 블록 하나를 꺼내어 좌표 (i, j)의 가장 위에 있는 블록 위에 놓는다. -> 1초
-
-최소 시간을 내려면 2번 작업을 우선 최대 수행, 1번 작업을 최소 수행
+이전 문제에서 썼던 투 포인터를
+반대로 동시에 높여가고 깎아 내려가는 과정을
+동시에 담아서 중간의 만나는 지점 계산하기?
 """
-# 풀이용 함수
-def solution(grid: List[List[int]], count: defaultdict, blocks: int):
-    # count에서 가장 많은 key 구하기
-    max_value = max(count.values())
-    max_blocks = sorted([key for key, value in count.items() if value == max_value], reverse=False)
-    print("가장 많으면서 가장 높은 블록 : " + str(max_blocks))
+min_seconds = sys.maxsize
+high_height = 0
+height_level = 0
 
-    # 최대한 2번 작업(blocks)을 수행해서 쌓을 수 있는 거 전부 쌓기(+ 카운팅)
+while True:
     """
-    많은 애들 중, 낮은 애들의 높이에 맞춰 먼저 블록을 쌓아간다.
+    제너레이터 표현식은 메모리를 효율적으로 사용하며, 특히 큰 데이터셋을 다룰 때 유리합니다. 
+    명시적인 반복문은 더 읽기 쉬운 코드를 작성할 수 있도록 도와주며, 복잡한 논리나 디버깅이 필요한 경우에 유리할 수 있습니다.
     
-    반복문 while
-    분기마다 가장 낮은(value가 가장 작은) 블록에게 채워줌
-    최적화 방안 : 그 다음으로 낮은 블록을 찾기 위해서 value도 전부 리스트화시키기?
-    
-    비슷한 방법으로 깎아내려가는 것도 같은 방식으로
+    max() 함수를 제너레이터 표현식에서 if문 대용으로 사용할 수 있음 
     """
+    # 제너레이터 표현식 기반
+    # 사용해야 되는 블록
+    # height_level 기준보다 낮으면 쌓아줘야 함
+    used_blocks = sum(max(0, height_level - height) for row in grid for height in row)
+    # 남아있는 블록
+    # height_level 기준보다 높으면 제거해야 함
+    remaining_blocks = sum(max(0, height - height_level) for row in grid for height in row)
 
-    # 울퉁불퉁 튀어나온 블록들 깎아내기(+ 카운팅)
+    # 사용해야 되는 블록 기준으로 시간 합산하기
+    if used_blocks <= remaining_blocks + inventory_blocks:
+        """
+        블록 쌓는 데에 1초
+        블록 파는 데에 2초
+        """
+        total_seconds = remaining_blocks * 2 + used_blocks
 
-    pass
+        # total_seconds 계산값으로 최소 시간 업데이트 + 높이 지정
+        if total_seconds <= min_seconds:
+            min_seconds = total_seconds
+            high_height = height_level
 
+    height_level += 1
 
+    # 문제 제시 범위 높이가 256이하 0 또는 자연수
+    if height_level > 256:
+        break
 
-# 입력 처리
-# N == 세로, M == 가로, B == block == 블록 개수
-N, M, blocks = map(int, input().split())
-grid = []
-count = defaultdict(int) # 입력을 받음과 동시에 요소 개수 세리기
-
-for _ in range(N):
-
-    row = list(map(int, input().split()))
-    grid.append(row)
-
-    # 투 포인터로 요소 세리기
-    left = 0
-    right = M - 1
-
-    while left <= right:
-        if left != right:
-            count[row[left]] += 1
-            count[row[right]] += 1
-        else:
-            count[row[left]] += 1
-
-        left += 1
-        right -= 1
-
-print("맵: " + str(grid))
-print("개수: " + str(count))
-
-# 정답 출력
-solution(grid, count, blocks)
-
-
-"""
-https://www.acmicpc.net/problem/18111
-"""
+print(min_seconds, high_height)
