@@ -24,19 +24,23 @@ while True:
     # 사용해야 되는 블록
     # height_level 기준보다 낮으면 쌓아줘야 함
     used_blocks = sum(max(0, height_level - height) for row in grid for height in row)
-    # 남아있는 블록
+    # 파헤쳐지는 블록
     # height_level 기준보다 높으면 제거해야 함
-    remaining_blocks = sum(max(0, height - height_level) for row in grid for height in row)
+    dug_blocks = sum(max(0, height - height_level) for row in grid for height in row)
 
     # 사용해야 되는 블록 기준으로 시간 합산하기
-    if used_blocks <= remaining_blocks + inventory_blocks:
+    # 인벤토리 블록과 깎아 얻은 블록이 사용된 블록보다 많아야 사용이 가능하다는 것이므로
+    # 사용해야 되는 블록이 더 많으면 그건 평탄화 작업이 불가능하다는 거
+    if used_blocks <= dug_blocks + inventory_blocks:
         """
         블록 쌓는 데에 1초
         블록 파는 데에 2초
         """
-        total_seconds = remaining_blocks * 2 + used_blocks
+        total_seconds = dug_blocks * 2 + used_blocks
 
         # total_seconds 계산값으로 최소 시간 업데이트 + 높이 지정
+        # 높이 레벨마다 최소 시간을 계속 계산해서 동기화
+        # 같은 시간이면 더 높은 애를 고르기 위한 반복문 분기 추가
         if total_seconds <= min_seconds:
             min_seconds = total_seconds
             high_height = height_level
