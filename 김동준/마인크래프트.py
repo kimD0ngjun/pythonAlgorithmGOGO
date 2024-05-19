@@ -1,7 +1,33 @@
 import sys
+from collections import defaultdict
 
+# 입력 단계
 N, M, inventory_blocks = map(int, input().split())
-grid = [list(map(int, input().split())) for _ in range(N)]
+grid = []
+height_count = defaultdict(int)
+
+for _ in range(N):
+    row = list(map(int, input().split()))
+    grid.append(row)
+
+    left = 0
+    right = M - 1
+
+    while left <= right:
+
+        if left < right:
+            height_count[row[left]] += 1
+            height_count[row[right]] += 1
+        else:
+            height_count[row[left]] += 1
+
+        left += 1
+        right -= 1
+
+height_list = sorted(list(height_count.keys()))
+
+# print(height_count)
+# print(height_list)
 
 # 최소 시간과 최대 높이 초기화
 """
@@ -11,22 +37,29 @@ grid = [list(map(int, input().split())) for _ in range(N)]
 """
 min_seconds = sys.maxsize
 high_height = 0
-height_level = 0
 
-while True:
-    """
-    제너레이터 표현식은 메모리를 효율적으로 사용하며, 특히 큰 데이터셋을 다룰 때 유리합니다. 
-    명시적인 반복문은 더 읽기 쉬운 코드를 작성할 수 있도록 도와주며, 복잡한 논리나 디버깅이 필요한 경우에 유리할 수 있습니다.
-    
-    max() 함수를 제너레이터 표현식에서 if문 대용으로 사용할 수 있음 
-    """
-    # 제너레이터 표현식 기반
-    # 사용해야 되는 블록
-    # height_level 기준보다 낮으면 쌓아줘야 함
-    used_blocks = sum(max(0, height_level - height) for row in grid for height in row)
-    # 파헤쳐지는 블록
-    # height_level 기준보다 높으면 제거해야 함
-    dug_blocks = sum(max(0, height - height_level) for row in grid for height in row)
+for height_level in range(257):
+    # """
+    # 제너레이터 표현식은 메모리를 효율적으로 사용하며, 특히 큰 데이터셋을 다룰 때 유리합니다.
+    # 명시적인 반복문은 더 읽기 쉬운 코드를 작성할 수 있도록 도와주며, 복잡한 논리나 디버깅이 필요한 경우에 유리할 수 있습니다.
+    #
+    # max() 함수를 제너레이터 표현식에서 if문 대용으로 사용할 수 있음
+    # """
+    # # 제너레이터 표현식 기반
+    # # 사용해야 되는 블록
+    # # height_level 기준보다 낮으면 쌓아줘야 함
+    # used_blocks = sum(max(0, height_level - height) for row in grid for height in row)
+    # # 파헤쳐지는 블록
+    # # height_level 기준보다 높으면 제거해야 함
+    # dug_blocks = sum(max(0, height - height_level) for row in grid for height in row)
+    used_blocks = 0
+    dug_blocks = 0
+
+    for height, count in height_count.items():
+        if height < height_level:
+            used_blocks += (height_level - height) * count
+        elif height > height_level:
+            dug_blocks += (height - height_level) * count
 
     # 사용해야 되는 블록 기준으로 시간 합산하기
     # 인벤토리 블록과 깎아 얻은 블록이 사용된 블록보다 많아야 사용이 가능하다는 것이므로
@@ -44,11 +77,5 @@ while True:
         if total_seconds <= min_seconds:
             min_seconds = total_seconds
             high_height = height_level
-
-    height_level += 1
-
-    # 문제 제시 범위 높이가 256이하 0 또는 자연수
-    if height_level > 256:
-        break
 
 print(min_seconds, high_height)
